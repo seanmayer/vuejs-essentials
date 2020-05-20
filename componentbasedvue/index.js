@@ -24,31 +24,29 @@ Vue.component('price', {
 Vue.component('product-list', {
   props: ['products', 'maximum'],
   template: `
-  <transition-group 
-  name="fade" 
-  tag="div" 
-  @beforeEnter="beforeEnter"
-  @enter="enter"
-  @leave="leave">
-  
-    <div class="row d-none mb-3 align-items-center"
-         v-for="(item, index) in products" :key="item.id"
-         v-if="item.price<=Number(maximum)"
-         :data-index="index+3">
-     <div class="col-1 m-auto">
-      <button class="btn btn-info"
-              @click="$emit('add',item)">+</button></div>
-     <div class="col-4">
-        <img class="img-fluid d-block" :src="item.image" :alt="item.name">
-     </div>
-     <div class="col">
-        <h3 class="text-info">{{ item.name }}</h3>
-          <p class="mb-0">{{ item.description }}</p>
-        <div class="h5 float-right"><price :value="Number(item.price)"></price></div>     
-      </div>
+<transition-group name="fade" tag="div"
+   @beforeEnter="beforeEnter"
+   @enter="enter"
+   @leave="leave">
+  <div class="row d-none mb-3 align-items-center" 
+       v-for="(item, index) in products" :key="item.id"
+       v-if="item.price<=Number(maximum)"
+       :data-index="index">
+   <div class="col-1 m-auto">
+    <button class="btn btn-info"
+            @click="$emit('add', item)">+</button> 
+   </div>
+   <div class="col-4">
+    <img class="img-fluid d-block" :src="item.image" :alt="item.name">
+   </div>
+   <div class="col">
+     <h3 class="text-info">{{ item.name }}</h3>
+     <p class="mb-0">{{ item.description }}</p>
+    <div class="h5 float-right">
+      <price :value="Number(item.price)"></price></div>     
     </div>
-
-  </transition-group> 
+  </div>
+</transition-group>
   `,
   methods:{
     beforeEnter: function(el) {
