@@ -1,33 +1,29 @@
 <template>
 
    <div id="app" class="container mt-5">
-      <h1>My Shop</h1>
-      <NavBar
+     <router-view
         :cart="cart"
         :cartQty="cartQty"
         :cartTotal="cartTotal"
+        :sliderStatus="sliderStatus" 
+        :maximum.sync="maximum"
+        :products="products"
         @toggle="toggleSliderStatus"
-        @delete="deleteItem"
-        ></NavBar>
-      <price-slider :sliderStatus="sliderStatus" :maximum.sync="maximum"></price-slider>
-      <product-list :maximum="maximum" :products="products" @add="addItem"></product-list>
+        @delete="deleteItem" 
+        @add="addItem"
+        ></router-view>
+
       
    </div>
 
 </template>
 
 <script>
-import ProductList from "./components/ProductList.vue";
-import PriceSlider from "./components/PriceSlider.vue";
-import NavBar from "./components/Navbar.vue";
+
 
 export default {
   name: 'App',
-
   components: {
-  ProductList,
-  PriceSlider,
-  NavBar
 },
   data: function() {
           return{
